@@ -1,14 +1,25 @@
-
 // You should implement your task here.
 
+const { re } = require("semver");
+
 module.exports = function towelSort(matrix) {
-  if (!matrix || !matrix.length) {
-    return [];
-  } else if (matrix.length == 2) {
-    return (matrix[0] + ',' + ('' + matrix[1]).split(",").reverse()).split(",");
-  } else if (matrix.length == 3) {
-    return (matrix[0] + ',' + ('' + matrix[1]).split(",").reverse() + ',' + matrix[2]).split(",");
-  } else if (matrix.length == 4) {
-    return (matrix[0] + ',' + ('' + matrix[1]).split(",").reverse() + ',' + matrix[2] + ',' + ('' + matrix[3]).split(",").reverse()).split(",");
-  }
-}
+    let result = [];
+
+    if (!matrix || !matrix.length) {
+        return [];
+    } else {
+        for (let i = 0; i < matrix.length; i++) {
+            let ind;
+            for (let j = 0; j < matrix[i].length; j++) {
+                if (i % 2 === 0) {
+                    ind = j;
+                    result.push(matrix[i][ind]);
+                } else {
+                    ind = matrix[i].length - 1 - j;
+                    result.push(matrix[i][ind]);
+                }
+            }
+        }
+        return result;
+    }
+};
